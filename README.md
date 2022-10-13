@@ -55,3 +55,17 @@ Example implementation go backend architecture.
    ```bash
    $ make xrun
    ```
+
+## API List
+
+API list on files `routes/routes.go`
+
+## Example API with Authentication
+
+```http
+GET localhost:8080/profiles
+```
+
+## Postman Collection
+
+Import files `go-base-backend.postman_collection.json` to your postman
