@@ -9,11 +9,11 @@ import (
 
 func InitAllRoutes(r *gin.Engine, h *handlers.Handler) {
 	// Articles
-	r.GET("/articles", h.GetAllArticles)
-	r.GET("/articles/:id", h.GetArticleByID)
-	r.POST("/articles", h.CreateArticle)
-	r.PUT("/articles/:id", h.UpdateArticle)
-	r.DELETE("/articles/:id", h.DeleteArticle)
+	r.GET("/articles", h.GetAllArticlesHandler)
+	r.GET("/articles/:id", h.GetArticleByIDHandler)
+	r.POST("/articles", h.CreateArticleHandler)
+	r.PUT("/articles/:id", h.UpdateArticleHandler)
+	r.DELETE("/articles/:id", h.DeleteArticleHandler)
 
 	// Auth
 	r.POST("/login", h.LoginHandler)

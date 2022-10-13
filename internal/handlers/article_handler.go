@@ -14,7 +14,7 @@ import (
 	"github.com/geshtng/go-base-backend/internal/models"
 )
 
-func (h *Handler) GetAllArticles(c *gin.Context) {
+func (h *Handler) GetAllArticlesHandler(c *gin.Context) {
 	result, err := h.articleService.GetAll()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, helpers.BuildErrorResponse(http.StatusInternalServerError, err.Error()))
@@ -24,7 +24,7 @@ func (h *Handler) GetAllArticles(c *gin.Context) {
 	c.JSON(http.StatusOK, helpers.BuildSuccessResponse(http.StatusOK, http.StatusText(http.StatusOK), result))
 }
 
-func (h *Handler) GetArticleByID(c *gin.Context) {
+func (h *Handler) GetArticleByIDHandler(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, helpers.BuildErrorResponse(http.StatusBadRequest, err.Error()))
@@ -45,7 +45,7 @@ func (h *Handler) GetArticleByID(c *gin.Context) {
 	c.JSON(http.StatusOK, helpers.BuildSuccessResponse(http.StatusOK, http.StatusText(http.StatusOK), result))
 }
 
-func (h *Handler) CreateArticle(c *gin.Context) {
+func (h *Handler) CreateArticleHandler(c *gin.Context) {
 	var request dtos.CreateArticleRequestDTO
 	var response dtos.CreateArticleResponseDTO
 
@@ -75,7 +75,7 @@ func (h *Handler) CreateArticle(c *gin.Context) {
 	c.JSON(http.StatusCreated, helpers.BuildSuccessResponse(http.StatusCreated, http.StatusText(http.StatusCreated), newArticle))
 }
 
-func (h *Handler) UpdateArticle(c *gin.Context) {
+func (h *Handler) UpdateArticleHandler(c *gin.Context) {
 	var request dtos.UpdateArticleRequestDTO
 	var response dtos.UpdateArticleResponseDTO
 
@@ -116,7 +116,7 @@ func (h *Handler) UpdateArticle(c *gin.Context) {
 	c.JSON(http.StatusOK, helpers.BuildSuccessResponse(http.StatusOK, http.StatusText(http.StatusOK), updatedArticle))
 }
 
-func (h *Handler) DeleteArticle(c *gin.Context) {
+func (h *Handler) DeleteArticleHandler(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, helpers.BuildErrorResponse(http.StatusBadRequest, err.Error()))
