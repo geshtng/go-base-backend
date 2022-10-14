@@ -34,7 +34,7 @@ func (h *Handler) RegisterHandler(c *gin.Context) {
 		var pgErr *pgconn.PgError
 
 		if errors.As(err, &pgErr); pgErr.Code == errn.UniqueViolation {
-			c.JSON(http.StatusUnauthorized, helpers.BuildErrorResponse(http.StatusUnauthorized, errn.ErrWrongUsernameOrPassword.Error()))
+			c.JSON(http.StatusUnauthorized, helpers.BuildErrorResponse(http.StatusUnauthorized, errn.ErrUsernameAlreadyExist.Error()))
 			return
 		}
 

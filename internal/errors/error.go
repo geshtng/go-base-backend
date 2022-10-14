@@ -9,4 +9,7 @@ var (
 
 	// ErrWrongUsernameOrPassword when user try to login with wrong username or password
 	ErrWrongUsernameOrPassword = errors.New("wrong username or password")
+
+	// ErrUsernameAlreadyExist when user register with registered username
+	ErrUsernameAlreadyExist = errors.New("username is already exist")
 )
