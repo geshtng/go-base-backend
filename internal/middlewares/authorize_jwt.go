@@ -21,7 +21,7 @@ func validateToken(encodedToken string) (*jwt.Token, error) {
 			return nil, errors.New("invalid token")
 		}
 
-		return []byte(jwtEnv[2]), nil
+		return []byte(jwtEnv.Secret), nil
 	})
 }
 

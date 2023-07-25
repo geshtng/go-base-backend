@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jackc/pgconn"
 	"gorm.io/gorm"
 
 	"github.com/geshtng/go-base-backend/internal/dtos"
@@ -31,13 +30,6 @@ func (h *Handler) RegisterHandler(c *gin.Context) {
 
 	newAuth, token, err := h.authService.Register(auth)
 	if err != nil {
-		var pgErr *pgconn.PgError
-
-		if errors.As(err, &pgErr); pgErr.Code == errn.UniqueViolation {
-			c.JSON(http.StatusUnauthorized, helpers.BuildErrorResponse(http.StatusUnauthorized, errn.ErrUsernameAlreadyExist.Error()))
-			return
-		}
-
 		c.JSON(http.StatusInternalServerError, helpers.BuildErrorResponse(http.StatusInternalServerError, err.Error()))
 		return
 	}

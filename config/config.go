@@ -13,12 +13,20 @@ type Server struct {
 }
 
 type Database struct {
-	DBHost            string `mapstructure:"db_host"`
-	DBPort            string `mapstructure:"db_port"`
-	DBName            string `mapstructure:"db_name"`
-	DBUsername        string `mapstructure:"db_username"`
-	DBPassword        string `mapstructure:"db_password"`
-	DBPostgresSslMode string `mapstructure:"db_postgres_ssl_mode"`
+	DBHost     string `mapstructure:"db_host"`
+	DBPort     string `mapstructure:"db_port"`
+	DBName     string `mapstructure:"db_name"`
+	DBUsername string `mapstructure:"db_username"`
+	DBPassword string `mapstructure:"db_password"`
+	DBCharset  string `mapstructure:"db_charset"`
+	DBPaseTime string `mapstructure:"db_parse_time"`
+	DBLocal    string `mapstructure:"db_local"`
+}
+
+type JwtConfig struct {
+	Expired string
+	Issuer  string
+	Secret  string
 }
 
 type Jwt struct {
@@ -54,7 +62,14 @@ func InitConfigDsn() string {
 		fmt.Println("[Config][InitConfigDsn] Unable to decode into struct:", err)
 	}
 
-	dsn := `postgres://` + config.DBUsername + `:` + config.DBPassword + `@` + config.DBHost + `:` + config.DBPort + `/` + config.DBName + `?sslmode=` + config.DBPostgresSslMode
+	dsn := config.DBUsername + `:` +
+		config.DBPassword + `@tcp(` +
+		config.DBHost + `:` +
+		config.DBPort + `)/` +
+		config.DBName +
+		`?charset=` + config.DBCharset +
+		`&parseTime=` + config.DBPaseTime +
+		`&loc=` + config.DBLocal
 
 	return dsn
 }
@@ -74,7 +89,7 @@ func InitConfigPort() string {
 	return port
 }
 
-func InitJwt() []string {
+func InitJwt() JwtConfig {
 	initConfig()
 
 	var config Configuration
@@ -84,9 +99,11 @@ func InitJwt() []string {
 		fmt.Println("[Config][InitJwt] Uncable to decode into struct:", err)
 	}
 
-	return []string{
-		config.Expired,
-		config.Issuer,
-		config.Secret,
+	jwtConfig := JwtConfig{
+		Expired: config.Expired,
+		Issuer:  config.Issuer,
+		Secret:  config.Secret,
 	}
+
+	return jwtConfig
 }
