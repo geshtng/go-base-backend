@@ -4,6 +4,10 @@
 
 Example implementation go backend architecture.
 
+## Release List
+1. Database using PostgreSQL: master branch
+2. Database using MySQL: checkout branch [mysql](https://github.com/geshtng/go-base-backend/tree/mysql)
+
 ## Setup
 
 1.  Clone project

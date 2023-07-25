@@ -21,6 +21,12 @@ type Database struct {
 	DBPostgresSslMode string `mapstructure:"db_postgres_ssl_mode"`
 }
 
+type JwtConfig struct {
+	Expired string
+	Issuer  string
+	Secret  string
+}
+
 type Jwt struct {
 	Expired string `mapstructure:"expired"`
 	Issuer  string `mapstructure:"issuer"`
@@ -74,7 +80,7 @@ func InitConfigPort() string {
 	return port
 }
 
-func InitJwt() []string {
+func InitJwt() JwtConfig {
 	initConfig()
 
 	var config Configuration
@@ -84,9 +90,11 @@ func InitJwt() []string {
 		fmt.Println("[Config][InitJwt] Uncable to decode into struct:", err)
 	}
 
-	return []string{
-		config.Expired,
-		config.Issuer,
-		config.Secret,
+	jwtConfig := JwtConfig{
+		Expired: config.Expired,
+		Issuer:  config.Issuer,
+		Secret:  config.Secret,
 	}
+
+	return jwtConfig
 }

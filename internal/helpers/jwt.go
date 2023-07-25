@@ -19,7 +19,7 @@ func GenerateJwtToken(data interface{}) (*string, error) {
 
 	jwtEnv := config.InitJwt()
 
-	expired, _ := strconv.ParseInt(jwtEnv[0], 10, 64)
+	expired, _ := strconv.ParseInt(jwtEnv.Expired, 10, 64)
 
 	idExp = expired * 60
 	unixTime := time.Now().Unix()
@@ -27,7 +27,7 @@ func GenerateJwtToken(data interface{}) (*string, error) {
 
 	claims := &IdTokenClaims{
 		RegisteredClaims: jwt.RegisteredClaims{
-			Issuer: jwtEnv[1],
+			Issuer: jwtEnv.Issuer,
 			ExpiresAt: &jwt.NumericDate{
 				Time: time.Unix(tokenExp, 0),
 			},
@@ -39,7 +39,7 @@ func GenerateJwtToken(data interface{}) (*string, error) {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString([]byte(jwtEnv[2]))
+	tokenString, err := token.SignedString([]byte(jwtEnv.Secret))
 	if err != nil {
 		return nil, err
 	}
