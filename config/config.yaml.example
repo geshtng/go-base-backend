@@ -1,10 +1,6 @@
 app:
   name: go-base-backend
 
-server:
-  host: 
-  port: 
-
 database:
   db_host: 
   db_port: 
@@ -12,8 +8,3 @@ database:
   db_username: 
   db_password: 
   db_postgres_ssl_mode: 
-
-jwt:
-  expired: 
-  issuer: 
-  secret: 

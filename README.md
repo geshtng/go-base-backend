@@ -7,6 +7,7 @@ Example implementation go backend architecture.
 ## Release List
 1. Database using PostgreSQL: master branch
 2. Database using MySQL: checkout branch [mysql](https://github.com/geshtng/go-base-backend/tree/mysql)
+3. Support for gRPC (database using PostgreSQL): checkout branch [grpc-postgresql](https://github.com/geshtng/go-base-backend/tree/grpc-postgresql)
 
 ## Setup
 
@@ -30,10 +31,6 @@ Example implementation go backend architecture.
         app:
             name: go-base-backend
 
-        server:
-            host: localhost
-            port: 8080
-
         database:
             db_host: localhost
             db_port: 5432
@@ -41,35 +38,16 @@ Example implementation go backend architecture.
             db_username: postgres
             db_password: postgres
             db_postgres_ssl_mode: disable
-
-        jwt:
-            expired: 60
-            issuer: go-base-backend
-            secret: sKk6E5gpVD
-
         ```
 
 ## Run the Project
 
-1. Without nodemon
    ```bash
    $ make run
    ```
-2. With nodemon
-   ```bash
-   $ make xrun
-   ```
 
-## API List
-
-API list on files `routes/routes.go`
-
-## Example API with Authentication
-
-```http
-GET localhost:8080/profiles
+Compile `.proto` file, use command: `make pb in=<file.proto>`<br>
+Example:
+```bash
+make pb in=internal/handlers/article/grpc/article.proto
 ```
-
-## Postman Collection
-
-Import files `go-base-backend.postman_collection.json` to your postman

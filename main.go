@@ -1,30 +1,42 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"flag"
+	"fmt"
+	"log"
+	"net"
 
-	"github.com/geshtng/go-base-backend/config"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
+
 	"github.com/geshtng/go-base-backend/db"
 	"github.com/geshtng/go-base-backend/internal/handlers"
-	"github.com/geshtng/go-base-backend/internal/routes"
+)
+
+var (
+	port = flag.Int("port", 50051, "The server port")
 )
 
 func main() {
-	port := config.InitConfigPort()
-
-	r := gin.Default()
-
 	err := db.Connect()
 	if err != nil {
 		panic(err)
 	}
 
-	h := handlers.InitAllHandlers()
+	flag.Parse()
 
-	routes.InitAllRoutes(r, h)
-
-	err = r.Run(port)
+	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
-		panic(err)
+		log.Fatalf("failed to listen: %v", err)
+	}
+
+	server := grpc.NewServer()
+	reflection.Register(server)
+
+	handlers.InitAllHandlers(server)
+
+	log.Printf("server listening at %v", listener.Addr())
+	if err := server.Serve(listener); err != nil {
+		log.Fatalf("failed to server: %v", err)
 	}
 }

@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package article_grpc;
+
+option go_package = "github.com/geshtng/go-base-backend/handlers/article/grpc";
+
+service Article {
+    rpc GetAllArticles(GetAllArticlesRequest) returns (GetAllArticlesResponse);
+    rpc GetArticleById(GetArticleByIdRequest) returns (GetArticleByIdResponse);
+    rpc CreateArticle(CreateArticleRequest) returns(CreateArticleResponse);
+    rpc UpdateArticle(UpdateArticleRequest) returns(UpdateArticleResponse);
+    rpc DeleteArticle(DeleteArticleRequest) returns(DeleteArticleResponse);
+}
+
+message ArticleResponse {
+    int64 id = 1;
+    string title = 2;
+    string description = 3;
+}
+
+message GetAllArticlesRequest {
+
+}
+
+message GetAllArticlesResponse {
+    repeated ArticleResponse data = 1;
+}
+
+message GetArticleByIdRequest {
+    int64 id = 1;
+}
+
+message GetArticleByIdResponse {
+    int64 id = 1;
+    string title = 2;
+    string description = 3;
+}
+
+message CreateArticleRequest {
+    string title = 1;
+    string description = 2;
+}
+
+message CreateArticleResponse {
+    int64 id = 1;
+    string title = 2;
+    string description = 3;
+}
+
+message UpdateArticleRequest {
+    int64 id = 1;
+    string title = 2;
+    string description = 3;
+}
+
+message UpdateArticleResponse {
+    int64 id = 1;
+    string title = 2;
+    string description = 3;
+}
+
+message DeleteArticleRequest {
+    int64 id = 1;
+}
+
+message DeleteArticleResponse {
+    string status = 1;
+}

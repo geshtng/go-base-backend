@@ -20,7 +20,6 @@ func Connect() (err error) {
 
 	err = db.AutoMigrate(
 		&models.Article{},
-		&models.User{},
 	)
 
 	if err != nil {
