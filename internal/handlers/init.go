@@ -9,20 +9,6 @@ import (
 	s "github.com/geshtng/go-base-backend/internal/services"
 )
 
-type Handler struct {
-	articleService s.ArticleService
-}
-
-type HandlerConfig struct {
-	ArticleService s.ArticleService
-}
-
-func New(c *HandlerConfig) *Handler {
-	return &Handler{
-		articleService: c.ArticleService,
-	}
-}
-
 func InitAllHandlers(server *grpc.Server) {
 	db := db.Get()
 
