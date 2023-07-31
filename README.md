@@ -7,6 +7,7 @@ Example implementation go backend architecture.
 ## Release List
 1. Database using PostgreSQL: master branch
 2. Database using MySQL: checkout branch [mysql](https://github.com/geshtng/go-base-backend/tree/mysql)
+3. Support for gRPC (database using PostgreSQL): checkout branch [grpc-postgresql](https://github.com/geshtng/go-base-backend/tree/grpc-postgresql)
 
 ## Setup
 
