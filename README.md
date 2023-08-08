@@ -8,6 +8,7 @@ Example implementation go backend architecture.
 1. Database using PostgreSQL: master branch
 2. Database using MySQL: checkout branch [mysql](https://github.com/geshtng/go-base-backend/tree/mysql)
 3. Support for gRPC (database using PostgreSQL): checkout branch [grpc-postgresql](https://github.com/geshtng/go-base-backend/tree/grpc-postgresql)
+4. Support for gRPC (database using MySQL): checkout branch [grpc-mysql](https://github.com/geshtng/go-base-backend/tree/grpc-mysql)
 
 ## Setup
 
@@ -33,11 +34,13 @@ Example implementation go backend architecture.
 
         database:
             db_host: localhost
-            db_port: 5432
+            db_port: 3306
             db_name: go_base_backend
-            db_username: postgres
-            db_password: postgres
-            db_postgres_ssl_mode: disable
+            db_username: root
+            db_password: 
+            db_charset: utf8mb4
+            db_parse_time: 1
+            db_local: Asia%2FJakarta
         ```
 
 ## Run the Project

@@ -8,12 +8,14 @@ import (
 )
 
 type Database struct {
-	DBHost            string `mapstructure:"db_host"`
-	DBPort            string `mapstructure:"db_port"`
-	DBName            string `mapstructure:"db_name"`
-	DBUsername        string `mapstructure:"db_username"`
-	DBPassword        string `mapstructure:"db_password"`
-	DBPostgresSslMode string `mapstructure:"db_postgres_ssl_mode"`
+	DBHost     string `mapstructure:"db_host"`
+	DBPort     string `mapstructure:"db_port"`
+	DBName     string `mapstructure:"db_name"`
+	DBUsername string `mapstructure:"db_username"`
+	DBPassword string `mapstructure:"db_password"`
+	DBCharset  string `mapstructure:"db_charset"`
+	DBPaseTime string `mapstructure:"db_parse_time"`
+	DBLocal    string `mapstructure:"db_local"`
 }
 
 type Configuration struct {
@@ -41,7 +43,14 @@ func InitConfigDsn() string {
 		fmt.Println("[Config][InitConfigDsn] Unable to decode into struct:", err)
 	}
 
-	dsn := `postgres://` + config.DBUsername + `:` + config.DBPassword + `@` + config.DBHost + `:` + config.DBPort + `/` + config.DBName + `?sslmode=` + config.DBPostgresSslMode
+	dsn := config.DBUsername + `:` +
+		config.DBPassword + `@tcp(` +
+		config.DBHost + `:` +
+		config.DBPort + `)/` +
+		config.DBName +
+		`?charset=` + config.DBCharset +
+		`&parseTime=` + config.DBPaseTime +
+		`&loc=` + config.DBLocal
 
 	return dsn
 }
