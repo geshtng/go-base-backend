@@ -19,6 +19,7 @@ func InitAllRoutes(r *gin.Engine, h *handlers.Handler) {
 	r.POST("/login", h.LoginHandler)
 	r.POST("/register", h.RegisterHandler)
 
+	// API endpoints below will use authorization
 	r.Use(middlewares.AuthorizeJWT)
 
 	r.GET("/profiles", h.ShowProfileHandler)
