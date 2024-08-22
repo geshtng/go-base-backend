@@ -3,6 +3,7 @@ module github.com/geshtng/go-base-backend
 go 1.23
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.2
 	github.com/gin-gonic/gin v1.8.1
 	github.com/golang-jwt/jwt/v4 v4.4.2
 	github.com/jackc/pgconn v1.13.0
