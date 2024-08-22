@@ -1,3 +1,5 @@
+Focused on PostgreSQL database (master branch)
+
 # go-base-backend
 
 ## Release List
@@ -81,4 +83,6 @@ Import files `go-base-backend.postman_collection.json` to your postman
   - [Copier](https://github.com/jinzhu/copier)
   - [Golang-jwt](https://github.com/golang-jwt/jwt)
   - [Viper](https://github.com/spf13/viper)
+  - [Testify](https://github.com/stretchr/testify)
+  - [Go-Sqlmock](https://github.com/DATA-DOG/go-sqlmock)
   - Other libraries listed in `go.mod`
